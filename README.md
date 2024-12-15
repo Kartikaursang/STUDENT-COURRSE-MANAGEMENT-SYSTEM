@@ -68,3 +68,50 @@ Stores information about students enrolled in courses.
 | course_id     | int          | YES  | MUL | NULL    |                |
 | password      | varchar(255) | NO   |     | NULL    |                |
 
+# Flask Routes
+
+## 1. Home Route
+### `GET /`
+- **Description**: Renders the home page.
+- **Function**: `home()`
+
+## 2. User Login Route
+### `GET /user-login`
+### `POST /user-login`
+- **Description**: Handles user login, allowing students to log in with their email and password.
+- **Function**: `user_login()`
+  - On `POST`: Checks user credentials and redirects to the user dashboard if successful, otherwise shows an error.
+
+## 3. Admin Login Route
+### `GET /admin-login`
+### `POST /admin-login`
+- **Description**: Handles admin login, allowing the admin to log in with their email and password.
+- **Function**: `admin_login()`
+  - On `POST`: Checks admin credentials and redirects to the admin dashboard if successful, otherwise shows an error.
+
+## 4. User Dashboard Route
+### `GET /user-dashboard/<int:user_id>`
+### `POST /user-dashboard/<int:user_id>`
+- **Description**: Displays the dashboard for the logged-in student, including their information, enrolled course, and recent notifications.
+- **Function**: `user_dashboard(user_id)`
+  - On `POST`: Allows the student to update their name and email.
+
+## 5. Admin Dashboard Route
+### `GET /admin-dashboard`
+### `POST /admin-dashboard`
+- **Description**: Displays the admin dashboard, where the admin can manage courses, students, and notifications.
+- **Function**: `admin_dashboard()`
+  - On `POST`: Handles various actions:
+    - `add_course`: Adds a new course to the database.
+    - `add_student`: Adds a new student to the database.
+    - `send_notification`: Sends a new notification to students.
+    - `delete_student`: Deletes a student from the database.
+    - `delete_course`: Deletes a course from the database.
+    - `delete_notification`: Deletes a notification.
+
+## 6. Logout Route
+### `GET /logout`
+- **Description**: Logs the user out and redirects to the home page.
+- **Function**: `logout()`
+
+

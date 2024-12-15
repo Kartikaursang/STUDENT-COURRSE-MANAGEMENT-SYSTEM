@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+   
+    <style>
+        h1 {
+    font-size: 2.5rem;
+    color: black;
+    text-align: center;
+    margin-top: 80px; 
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px; 
+    border-radius: 8px; 
+    margin-left: auto;
+    margin-right: auto; 
+    width: 90%;
+    margin-bottom: 20px; 
+}
+
+        body {
+            background-image: url('/static/images/m1.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+     
+        .container {
+            display: flex;
+            flex-direction: row; 
+            height: 75vh; 
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .section {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+
+
+        .profile-section, .course-section {
+            margin-top: 10px;
+        }
+
+  
+        .notification-section {
+            margin-top: 10px;
+        }
+
+
+        .update-form {
+            margin-top: 10px;
+        }
+
+        .update-form input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        .update-form input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+
+        .update-button, .logout-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .update-button:hover {
+            background-color: #45a049;
+        }
+        h2 {
+            margin-bottom: 10px;
+            color: BLACK;
+            align-self: auto;
+        }
+    </style>
+</head>
+<body>
+
+
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+        <h1>Welcome, {{ student[1] }}!</h1>
+
+
+    <div class="container">
+        
+        <div class="section profile-section">
+            <h2>Profile Details</h2>
+            <p><strong>Name:</strong> {{ student[1] }}</p>
+            <p><strong>Email:</strong> {{ student[2] }}</p>
+            <p><strong>Course Name:</strong> {{ course[1] }}</p>
+            <p><strong>Course Code:</strong> {{ course[2] }}</p>
+            <p><strong>Course Duration:</strong> {{ course[3] }} MONTHS</p>
+        </div <!-- Right Section -->
+        <div class="section update-form">
+            <h2>Update Profile</h2>
+            <form method="POST">
+                <input type="text" name="name" value="{{ student[1] }}" placeholder="Update your name" required>
+                <input type="email" name="email" value="{{ student[2] }}" placeholder="Update your email" required>
+                <button type="submit" class="update-button">Update Profile</button>
+            </form>
+        </div>
+
+        <div class="section notification-section">
+            <h2>Notifications</h2>
+            {% for notification in notifications %}
+                <p><strong>{{ notification[1] }}</strong> ({{ notification[2] }})</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html> 

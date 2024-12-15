@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+         .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+        body {
+            background-image: url('/static/images/m1.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            margin-top: 65px;
+        }
+        h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: hsl(136, 75%, 65%);
+        }
+        form {
+            margin-top: 10px;
+        }
+        input, select, textarea {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 15px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        textarea {
+            height: 100px;
+        }
+
+        @media (max-width: 768px) {
+            table, th, td {
+                font-size: 14px;
+            }
+            .container {
+                margin: 15px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            input, select, button, textarea {
+                padding: 12px;
+            }
+            button {
+                padding: 12px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            table, th, td {
+                font-size: 12px;
+            }
+            input, select, button, textarea {
+                padding: 10px;
+            }
+            button {
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+
+    <div class="container">
+        <h2>Add & Manage Students</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="add_student">
+            <input type="text" name="student_name" placeholder="Student Name" required>
+            <input type="email" name="student_email" placeholder="Student Email" required>
+            <input type="password" name="student_password" placeholder="Student Password" required>
+            <select name="student_course" required>
+                <option value="">Select Course</option>
+                {% for course in courses %}
+                    <option value="{{ course[0] }}">{{ course[0] }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Add Student</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student[0] }}</td>
+                    <td>{{ student[1] }}</td>
+                    <td>{{ student[2] }}</td>
+                    <td>{{ student[3] }}</td>
+                    <td>
+                        <form method="POST" style="display:inline;">
+                            <input type="hidden" name="action" value="delete_student">
+                            <input type="hidden" name="student_id" value="{{ student[0] }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Add & Manage Courses</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="add_course">
+            <input type="text" name="course_name" placeholder="Course Name" required>
+            <input type="text" name="course_code" placeholder="Course Code" required>
+            <input type="number" name="course_duration" placeholder="Course Duration (months)" required>
+            <button type="submit">Add Course</button>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Duration</th>
+                    <th>Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course[1] }}</td>
+                    <td>{{ course[2] }}</td>
+                    <td>{{ course[3] }}</td>
+                    <td>
+                        <form method="POST" style="display:inline;">
+                            <input type="hidden" name="action" value="delete_course">
+                            <input type="hidden" name="course_id" value="{{ course[0] }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>View Enrollments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for enrollment in enrollments %}
+                <tr>
+                    <td>{{ enrollment[0] }}</td> 
+                    <td>{{ enrollment[1] }}</td> 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Send Notifications</h2>
+        <form method="POST">
+            <input type="hidden" name="action" value="send_notification">
+            <textarea name="notification_message" placeholder="Enter notification message" required></textarea>
+            <button type="submit">Send Notification</button>
+        </form>
+
+        <h3>Recent Notifications</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Notification ID</th>
+                    <th>Message</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notification in notifications %}
+                <tr>
+                    <td>{{ notification[0] }}</td> 
+                    <td>{{ notification[1] }}</td> 
+                    <td>{{ notification[2] }}</td> 
+                    <td>
+                        <form method="POST" style="display:inline;">
+                            <input type="hidden" name="action" value="delete_notification">
+                            <input type="hidden" name="notification_id" value="{{ notification[0] }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

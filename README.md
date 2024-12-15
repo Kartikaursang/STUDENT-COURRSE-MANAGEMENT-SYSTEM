@@ -126,41 +126,33 @@ The home page serves as the landing page of the application, providing links to 
 ## 2. User Login Page
 ### Description:
 The user login page allows students to log in using their email and password. Upon successful login, the student will be redirected to the user dashboard. If the credentials are incorrect, an error message is shown prompting the user to retry.
-    ![User Login Screenshot](path_to_user_login_screenshot.png)
+    ![User Login Screenshot](/screenshots/userloginpage.png)
 
 ---
 
 ## 3. Admin Login Page
 ### Description:
 This page allows administrators to log in using their email and password to access the admin dashboard. If the login details are incorrect, an error message will prompt the admin to retry.
-
-### Output (Screenshot):
-![Admin Login Screenshot](path_to_admin_login_screenshot.png)
+    ![Admin Login Screenshot](/screenshots/adminloginpage.png)
 
 ---
 
 ## 4. User Dashboard Page
 ### Description:
 The user dashboard displays the student's profile, including their name, email, and enrolled course. It also shows recent notifications relevant to the student. The student can update their name and email through this page. After making changes, the student is redirected to the same page with updated details.
-
-### Output (Screenshot):
-![User Dashboard Screenshot](path_to_user_dashboard_screenshot.png)
+    ![User Dashboard Screenshot](/screenshots/user1.png)
+    ![User Dashboard Screenshot](/screenshots/user2.png)
 
 ---
 
 ## 5. Admin Dashboard Page
 ### Description:
 The admin dashboard allows the administrator to manage the data on the site. Admins can add new courses, students, and send notifications. They can also delete students, courses, and notifications. This page provides an overview of the courses, students, enrollments, and recent notifications.
-
-### Output (Screenshot):
-![Admin Dashboard Screenshot](path_to_admin_dashboard_screenshot.png)
+    ![Admin Dashboard Screenshot](/screenshots/admin1.png)
+    ![Admin Dashboard Screenshot](/screenshots/admin2.png)
+    ![Admin Dashboard Screenshot](/screenshots/admin3.png)
 
 ---
 
-## 6. Logout Page
-### Description:
-The logout page logs the user (either a student or admin) out of the application, ending the session and redirecting the user back to the home page.
 
-### Output (Screenshot):
-![Logout Screenshot](path_to_logout_screenshot.png)
 
